@@ -1,13 +1,196 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern To Do List</title>
+    <style>
+        /* 1. Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* 2. Main Container (Layout Kiri-Kanan) */
+        .container {
+            display: flex;
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 900px;
+            height: 600px; /* Tinggi fix agar terlihat rapi */
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* 3. Panel Kiri (Form) */
+        .left-panel {
+            flex: 1; /* Mengambil 1 bagian space */
+            padding: 40px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid #f0f0f0;
+        }
+
+        .left-panel h2 {
+            margin-bottom: 24px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4f46e5; /* Warna indigo modern */
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #4338ca;
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        /* 4. Panel Kanan (List Data) */
+        .right-panel {
+            flex: 1.5; /* Mengambil 1.5 bagian space (lebih lebar) */
+            padding: 40px;
+            background-color: #f9fafb;
+            overflow-y: auto; /* Agar bisa discroll jika data banyak */
+        }
+
+        .right-panel h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Style untuk Item Tugas (Dummy Data) */
+        .task-list {
+            list-style: none;
+        }
+
+        .task-item {
+            background: white;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            border: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .task-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+
+        .task-info h4 {
+            font-size: 1rem;
+            color: #111;
+            margin-bottom: 4px;
+        }
+
+        .task-info p {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* 5. Responsive (Untuk HP) */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .left-panel, .right-panel {
+                padding: 24px;
+                border-right: none;
+            }
+
+            .left-panel {
+                border-bottom: 1px solid #f0f0f0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="left-panel">
+            <h2>Buat Tugas Baru</h2>
+            <form id="form-task">
+                <div class="form-group">
+                    <label for="name">Judul Tugas</label>
+                    <input type="text" id="name" name="name" placeholder="Contoh: Belajar CSS" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Deskripsi</label>
+                    <input type="text" id="description" name="description" placeholder="Detail tugas..." required>
+                </div>
+                
+                <button type="submit">Tambah Data</button>
+            </form>
+        </div>
+
+        <div class="right-panel">
+            <h3>Daftar Tugas</h3>
+            <ul class="task-list" id="task-list">
+                <!-- task-item li -->
+                <!-- task-info div -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
 </html>
